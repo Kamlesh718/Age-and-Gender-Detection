@@ -1,0 +1,240 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Register Page</title>
+    <style>
+      body {
+        font-family: Arial, sans-serif;
+        margin: 0;
+        padding: 0;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        background-image: url("../static/assets/Face\ ID\ glitch\ effect.gif");
+        background-size: cover;
+        background-repeat: no-repeat;
+        background-position: center;
+        height: 100vh;
+        background-color: #f2f5f8;
+      }
+
+      .container {
+        /* background-color: #ffffff; */
+        border-radius: 8px;
+        box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        overflow: hidden;
+        width: 400px;
+        max-width: 100%;
+        text-align: center;
+        padding: 20px;
+      }
+
+      h1 {
+        color: #2cabff;
+        background-color: #ffffffe8;
+        padding: 12px;
+        border-radius: 5px;
+      }
+
+      input {
+        width: 100%;
+        padding: 10px;
+        margin: 8px 0;
+        box-sizing: border-box;
+        border: 1px solid #ccc;
+        border-radius: 4px;
+        font-size: 16px;
+      }
+
+      button {
+        background-color: #3498db;
+        color: #ffffff;
+        padding: 10px 20px;
+        border: none;
+        border-radius: 4px;
+        cursor: pointer;
+        font-size: 16px;
+      }
+
+      button:hover {
+        background-color: #2980b9;
+      }
+
+      #signUp {
+        background-color: #3498db;
+        color: #ffffff;
+        padding: 10px 20px;
+        border: none;
+        border-radius: 4px;
+        cursor: pointer;
+        font-size: 16px;
+      }
+
+      .login {
+        margin-top: 20px;
+        color: #777;
+        background-color: #ffffffe8;
+        padding: 12px;
+        border-radius: 5px;
+      }
+
+      .toggle-password {
+        background-color: transparent;
+        border: none;
+        cursor: pointer;
+        float: right;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="container">
+      <h1>Register</h1>
+      <!-- <form action="/login" method="post" id="registration-form"> -->
+      <input
+        type="text"
+        id="username"
+        name="username"
+        placeholder="Username"
+        required
+      />
+      <input
+        type="email"
+        id="email"
+        name="email"
+        placeholder="Email"
+        required
+      />
+      <div class="group">
+        <input
+          type="password"
+          id="password"
+          name="password"
+          placeholder="Password"
+          required
+        />
+        <button
+          class="toggle-password"
+          id="togglePassword"
+          onclick="togglePasswordVisibility()"
+        >
+          Show
+        </button>
+      </div>
+      <input type="submit" id="signUp" name="signup_submit" value="Sign Up" />
+      <!-- <button type="submit">Register</button> -->
+      <!-- </form> -->
+      <p class="login">Already have an account? <a href="/login">Login</a></p>
+    </div>
+  </body>
+  <script>
+    function togglePasswordVisibility() {
+      var passwordInput = document.getElementById("password");
+      var toggleButton = document.getElementById("togglePassword");
+      if (passwordInput.type === "password") {
+        passwordInput.type = "text";
+        toggleButton.textContent = "Hide";
+      } else {
+        passwordInput.type = "password";
+        toggleButton.textContent = "Show";
+      }
+    }
+  </script>
+  <script type="module">
+    // Import the functions you need from the SDKs you need
+    import { initializeApp } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-app.js";
+
+    import {
+      getDatabase,
+      set,
+      ref,
+    } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-database.js";
+
+    import {
+      getAuth,
+      createUserWithEmailAndPassword,
+    } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-auth.js";
+    // TODO: Add SDKs for Firebase products that you want to use
+    // https://firebase.google.com/docs/web/setup#available-libraries
+
+    // Your web app's Firebase configuration
+    const firebaseConfig = {
+      apiKey: "AIzaSyC-Re-42eFM3Gu24BmUYBi_AaTLl0DPS5g",
+      authDomain: "authentication-app-e7b45.firebaseapp.com",
+      databaseURL:
+        "https://authentication-app-e7b45-default-rtdb.firebaseio.com",
+      projectId: "authentication-app-e7b45",
+      storageBucket: "authentication-app-e7b45.appspot.com",
+      messagingSenderId: "356399176100",
+      appId: "1:356399176100:web:6b99d675b4e80c7ecd4931",
+    };
+
+    // Initialize Firebase
+    const app = initializeApp(firebaseConfig);
+    const database = getDatabase(app);
+    const auth = getAuth();
+
+    const signUp = document.getElementById("signUp");
+
+    signUp.addEventListener("click", async (e) => {
+      e.preventDefault();
+
+      var email = document.getElementById("email").value;
+      var password = document.getElementById("password").value;
+      var username = document.getElementById("username").value;
+
+      try {
+        // Create user through Firebase Authentication
+        const userCredential = await createUserWithEmailAndPassword(
+          auth,
+          email,
+          password
+        );
+        const user = userCredential.user;
+
+        // Update Realtime Database with additional user data
+        await set(ref(database, "users/" + user.uid), {
+          username: username,
+          email: email,
+        });
+
+        // Notify user and redirect to login on success
+        alert("Registration successful. You can now proceed to login");
+        window.location.replace("/login");
+      } catch (error) {
+        const errorCode = error.code;
+        const errorMessage = error.message;
+
+        alert(errorMessage);
+      }
+    });
+  </script>
+
+  <script>
+    document.addEventListener("DOMContentLoaded", function () {
+      const registrationForm = document.getElementById("registration-form");
+
+      registrationForm.addEventListener("submit", async function (event) {
+        event.preventDefault();
+
+        const formData = new FormData(registrationForm);
+        const response = await fetch("/register", {
+          method: "POST",
+          body: formData,
+        });
+
+        const result = await response.json();
+
+        if (result.status === "success") {
+          // Registration successful, show a success alert
+          alert(result.message);
+          window.location.href = "/login"; // Redirect to login page
+        } else {
+          // Registration failed, show an error alert
+          alert(result.message);
+        }
+      });
+    });
+  </script>
+</html>

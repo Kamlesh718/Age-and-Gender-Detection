@@ -1,0 +1,307 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <link
+      rel="icon"
+      href="https://cdn.pixabay.com/photo/2021/03/23/09/01/webcam-6116845_1280.png"
+      type="image/x-icon"
+    />
+    <link rel="stylesheet" href="../static/styles/style.css" />
+    <link rel="stylesheet" href="../static/styles/aj.css" />
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css"
+    />
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>About - Age and Gender Prediction</title>
+    <style>
+      body {
+        margin: 0;
+        padding: 0;
+        font-family: Arial, sans-serif;
+        background-color: #1e1e1e;
+        color: #fff;
+      }
+
+      nav {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        background-color: blue;
+        padding: 10px;
+        text-align: right;
+        position: fixed;
+        top: 0;
+        width: 100%;
+        opacity: 1;
+        transition: background-color 0.3s, opacity 0.3s; /* Add transitions for smooth effects */
+      }
+
+      a {
+        text-decoration: none;
+      }
+
+      #logout,
+      #username,
+      .home {
+        color: white;
+        background-color: navy;
+        border: none;
+        padding: 10px 20px;
+        cursor: pointer;
+        border-radius: 24px;
+      }
+
+      .wrapper {
+        display: flex;
+        flex-direction: column;
+        min-height: 100vh;
+      }
+
+      #logout:hover,
+      #username:hover,
+      .home:hover {
+        color: navy;
+        background-color: white;
+        transition: 0.3s;
+      }
+
+      .container {
+        display: flex;
+        flex-direction: column;
+        justify-items: center;
+        align-items: center;
+        max-width: 800px;
+        margin: 50px auto;
+        padding: 0 20px;
+        height: 66vh;
+        overflow: hidden;
+      }
+      .a_g-theme {
+        background-color: #1e1e1e;
+        color: #fff;
+        padding: 20px;
+        border-radius: 10px;
+      }
+
+      .a_g-theme a {
+        color: white;
+        background-color: navy;
+        border: none;
+        padding: 10px 20px;
+        cursor: pointer;
+        border-radius: 24px;
+        text-decoration: none;
+      }
+      .a_g-theme a:hover {
+        color: navy;
+        background-color: white;
+        transition: 0.3s;
+        text-decoration: underline;
+      }
+
+      footer {
+        background-color: blue;
+        color: white;
+        padding: 20px;
+        text-align: center;
+        bottom: 0;
+        width: 100%;
+        flex-shrink: 0;
+      }
+
+      .aj-container {
+        max-width: 1200px;
+        margin: 0 auto;
+        padding: 0 20px;
+      }
+
+      .aj-row {
+        display: flex;
+        flex-wrap: wrap;
+        margin: 0 -16px;
+        justify-content: center;
+        align-items: center;
+        gap: 12px;
+      }
+
+      .aj-padding-16 {
+        padding: 16px;
+      }
+
+      .aj-button {
+        background-color: navy;
+        color: white;
+        padding: 10px 20px;
+        text-decoration: none;
+        border-radius: 5px;
+      }
+
+      .fa {
+        font-size: 20px;
+        margin-right: 10px;
+      }
+
+      .fa-facebook {
+        color: #3b5998;
+      }
+
+      .fa-twitter {
+        color: #55acee;
+      }
+
+      .fa-instagram {
+        color: #125688;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="wrapper">
+      <div class="container a_g-theme">
+        <nav>
+          <div>
+            <span id="username">UserName</span>
+            <a href="/" class="home">Home</a>
+          </div>
+          <input type="submit" id="logout" value="LOGOUT" />
+        </nav>
+        <h1>About Age and Gender Prediction</h1>
+        <ol>
+          <li>
+            <p>
+              This project utilizes a caffe model to predict age and gender from
+              images.
+            </p>
+          </li>
+          <li>
+            <p>
+              The model is trained on a large dataset and utilizes deep learning
+              techniques.
+            </p>
+          </li>
+          <li>
+            <p>
+              Live detection functionality is implemented using a webcam. Users
+              can utilize their webcam to perform real-time age and gender
+              prediction.They can also upload image for the prediction.
+            </p>
+          </li>
+        </ol>
+        <h2>Check out my other project:</h2>
+        <ul>
+          <li>
+            <a href="https://virtueverses.vercel.app/" target="_blank">
+              VirtueVerses
+            </a>
+            - Its a blogging application where user can share their blogs.
+          </li>
+        </ul>
+      </div>
+      <footer>
+        <div class="aj-container">
+          <div class="aj-row">
+            <div>
+              <div class="aj-row aj-padding-16">
+                <div>
+                  <a href="#" class="aj-button aj-black"
+                    ><i class="fa fa-facebook"></i
+                  ></a>
+                </div>
+                <div>
+                  <a href="#" class="aj-button aj-black"
+                    ><i class="fa fa-twitter"></i
+                  ></a>
+                </div>
+                <div>
+                  <a href="#" class="aj-button aj-black"
+                    ><i class="fa fa-instagram"></i
+                  ></a>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div>
+          <a href="/"><i class="fa fa-home aj-margin-right"></i>Home</a>
+        </div>
+      </footer>
+    </div>
+  </body>
+  <script type="module">
+    // Import the functions you need from the SDKs you need
+    import { initializeApp } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-app.js";
+
+    import {
+      getDatabase,
+      ref,
+      get,
+      update,
+    } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-database.js";
+
+    import {
+      getAuth,
+      signOut,
+      onAuthStateChanged,
+      signInWithEmailAndPassword,
+    } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-auth.js";
+    // TODO: Add SDKs for Firebase products that you want to use
+    // https://firebase.google.com/docs/web/setup#available-libraries
+
+    // Your web app's Firebase configuration
+    const firebaseConfig = {
+      apiKey: "AIzaSyC-Re-42eFM3Gu24BmUYBi_AaTLl0DPS5g",
+      authDomain: "authentication-app-e7b45.firebaseapp.com",
+      databaseURL:
+        "https://authentication-app-e7b45-default-rtdb.firebaseio.com",
+      projectId: "authentication-app-e7b45",
+      storageBucket: "authentication-app-e7b45.appspot.com",
+      messagingSenderId: "356399176100",
+      appId: "1:356399176100:web:6b99d675b4e80c7ecd4931",
+    };
+
+    // Initialize Firebase
+    const app = initializeApp(firebaseConfig);
+    const database = getDatabase(app);
+    const auth = getAuth();
+
+    const user = auth.currentUser;
+
+    onAuthStateChanged(auth, async (user) => {
+      if (user) {
+        // User is signed in, see docs for a list of available properties
+        // https://firebase.google.com/docs/reference/js/auth.user
+        const uid = user.uid;
+        const usernameRef = ref(database, `users/${uid}/username`);
+        const usernameSnapshot = await get(usernameRef);
+        console.log(usernameSnapshot);
+
+        if (usernameSnapshot.exists()) {
+          const userName = usernameSnapshot._node.value_;
+          console.log(userName);
+          username.innerHTML = userName.toUpperCase();
+          // Insert the userName value into the HTML element
+        } else {
+          console.log("Username not found in the database");
+        }
+      } else {
+        alert("You are logged out. Redirecting to login page.");
+        window.location.replace("/login");
+      }
+    });
+
+    logout.addEventListener("click", (e) => {
+      signOut(auth)
+        .then(() => {
+          // Sign-out successful.
+          window.location.replace("/login");
+        })
+        .catch((error) => {
+          const errorCode = error.code;
+          const errorMessage = error.message;
+
+          alert(errorMessage);
+        });
+    });
+  </script>
+</html>
